@@ -1,0 +1,22 @@
+!!!
+%html
+%head
+  %title Track & Record
+  = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+  = javascript_include_tag 'application', 'data-turbolinks-track' => true
+  = csrf_meta_tags
+%body
+  %p.notice= notice
+  %p.alert= alert
+
+
+  = yield
+
+  %ul
+    %li= link_to "All Records", root_path
+    - Category.all.each do |category|
+      %li= link_to category.name, records_path(category: category.name)
+
+
+
+

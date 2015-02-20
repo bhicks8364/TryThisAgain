@@ -3,7 +3,12 @@ class RecordsController < ApplicationController
  before_action :authenticate_user!, except: [:index, :show]
 
   def index
-    @records = Record.all.order("created_at DESC")
+    if params[:category].blank?
+     @records = Record.all.order("created_at DESC")
+    else
+      @category_id = Category.find_by(name: params[:category]).id
+      @records = Record.where(category_id: @category_id).order("created_at DESC")
+    end
   end
 
   def show
@@ -30,7 +35,7 @@ class RecordsController < ApplicationController
   end
 
   def record_params
-    params.require(:record).permit(:title, :content)
+    params.require(:record).permit(:title, :content, :category_id)
 
   end
 end

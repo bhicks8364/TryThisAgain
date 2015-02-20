@@ -1,6 +1,6 @@
 
 - @records.each do |record|
-  %h2= record.title
+  %h2= link_to record.title, record
   %p
     Published at
     = record.created_at.strftime('%b %d, %Y')
