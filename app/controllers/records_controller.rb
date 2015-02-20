@@ -9,11 +9,11 @@ class RecordsController < ApplicationController
   end
 
   def new
-    @record = Record.new
+    @record = current_user.records.build
   end
 
   def create
-    @record = Record.new(record_params)
+    @record = current_user.records.build(record_params)
     if @record.save
       redirect_to @record
     else
