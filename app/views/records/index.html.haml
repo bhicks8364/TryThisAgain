@@ -1,3 +1,11 @@
-%h1 This is the records#index placeholder
+
+
+- @records.each do |record|
+  %h2= record.title
+  %p
+    Published at
+    = record.created_at.strftime('%b %d, %Y')
+
+  %p= truncate(record.content, length: 200)
 
 = link_to "New Record", new_record_path
