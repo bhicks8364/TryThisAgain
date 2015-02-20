@@ -1,5 +1,5 @@
 class RecordsController < ApplicationController
- before_action :find_record, only: [:show]
+ before_action :find_record, only: [:show, :edit, :update, :destroy]
  before_action :authenticate_user!, except: [:index, :show]
 
   def index
@@ -25,7 +25,26 @@ class RecordsController < ApplicationController
     else
       render 'new'
     end
+
   end
+
+ def edit
+ end
+
+ def update
+    if @record.update(record_params)
+     redirect_to @record
+    else
+      render 'edit'
+    end
+ end
+
+ def destroy
+   @record.destroy
+   redirect_to root_path
+ end
+
+
 
 
   private
