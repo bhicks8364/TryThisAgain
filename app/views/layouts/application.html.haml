@@ -5,17 +5,28 @@
   = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
   = javascript_include_tag 'application', 'data-turbolinks-track' => true
   = csrf_meta_tags
+
 %body
+  %nav.navbar.navbar-default.navbar-fixed-top
+    .container
+      = link_to "HOME", root_path, class: "navbar-brand"
+      %ul.nav.navbar-nav.navbar-right
+      -if user_signed_in?
+        %li= link_to "New Record", new_record_path, class: "navbar-brand"
   %p.notice= notice
   %p.alert= alert
 
+  .container
+    .row
+      .col-md-8
+      = yield
+      .col-md-4
+        %ul
+          %li= link_to "All Records", root_path
+          - Category.all.each do |category|
+            %li= link_to category.name, records_path(category: category.name)
 
-  = yield
 
-  %ul
-    %li= link_to "All Records", root_path
-    - Category.all.each do |category|
-      %li= link_to category.name, records_path(category: category.name)
 
 
 
