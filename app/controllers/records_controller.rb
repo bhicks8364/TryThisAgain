@@ -1,5 +1,6 @@
 class RecordsController < ApplicationController
  before_action :find_record, only: [:show]
+ before_action :authenticate_user!, except: [:index, :show]
 
   def index
     @records = Record.all.order("created_at DESC")

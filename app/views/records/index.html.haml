@@ -7,4 +7,5 @@
 
   %p= truncate(record.content, length: 200)
 
-= link_to "New Record", new_record_path
+- if user_signed_in?
+  = link_to "New Record", new_record_path
