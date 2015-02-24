@@ -1,0 +1,11 @@
+
+- @records.each do |record|
+  %h2= link_to record.title, record
+  %p
+    Published at
+    = record.created_at.strftime('%b %d, %Y')
+
+  %p= truncate(record.content, length: 200)
+
+- if user_signed_in?
+  = link_to "New Record", new_record_path
